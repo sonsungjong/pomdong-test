@@ -57,14 +57,6 @@ select {
 */
 
 
-/* 
-  Styles from here downwards are legacy/unused or specific to unrefactored dashboard pages.
-  Ideally should be refactored next.
-*/
-.bottom-btn {
-  margin-top: auto;
-}
-
 .right-board {
   padding: 10px;
   display: flex;
