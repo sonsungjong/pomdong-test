@@ -1,65 +1,124 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import Link from "next/link";
+import { useMemo, useState } from "react";
+import { ChevronDown, ChevronUp, Copy, Plus, Trash2, Upload } from "lucide-react";
+
+const featureSource = ["MMSE", "MMSE", "MMSE", "MMSE", "MMSE", "MMSE", "MMSE", "MMSE", "MMSE"];
+
+export default function FilterPage() {
+  const [tab, setTab] = useState<"inclusion" | "exclusion">("inclusion");
+  const [search, setSearch] = useState("");
+
+  const featureList = useMemo(() => {
+    const term = search.trim().toLowerCase();
+    if (!term) {
+      return featureSource;
+    }
+    return featureSource.filter((item) => item.toLowerCase().includes(term));
+  }, [search]);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <section className="screen-panel">
+      <header className="screen-head">
+        <div>
+          <h1 className="screen-title">Filter</h1>
+          <p className="screen-subtitle">Cohort Filter Setup</p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="head-buttons">
+          <button type="button" className="btn-ghost">
+            Save Simulation
+          </button>
+          <Link href="/subgroups" className="btn-ghost">
+            Go to Subgroups
+          </Link>
+          <Link href="/dashboard" className="btn-primary">
+            Go to Simulation
+          </Link>
         </div>
-      </main>
-    </div>
+      </header>
+
+      <div className="filter-layout">
+        <aside className="left-pane">
+          <h2 className="pane-label">Feature List</h2>
+          <input
+            className="search-input"
+            placeholder="Search features"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
+          <div className="feature-scroll">
+            {featureList.map((item, index) => (
+              <button type="button" className="feature-row" key={`${item}-${index}`}>
+                <ChevronDown size={14} className="feature-chevron" />
+                <span>{item}</span>
+              </button>
+            ))}
+          </div>
+        </aside>
+
+        <section className="right-pane">
+          <div className="right-top">
+            <div className="tab-list">
+              <button
+                type="button"
+                className={tab === "inclusion" ? "tab-chip is-active" : "tab-chip"}
+                onClick={() => setTab("inclusion")}
+              >
+                Inclusion
+              </button>
+              <button
+                type="button"
+                className={tab === "exclusion" ? "tab-chip is-active" : "tab-chip"}
+                onClick={() => setTab("exclusion")}
+              >
+                Exclusion
+              </button>
+            </div>
+
+            <div className="tool-list">
+              <button type="button" className="tool-btn">
+                <Upload size={14} />
+              </button>
+              <button type="button" className="tool-btn">
+                <Copy size={14} />
+              </button>
+              <button type="button" className="tool-btn">
+                <Trash2 size={14} />
+              </button>
+              <button type="button" className="tool-add">
+                Add Section <Plus size={14} />
+              </button>
+            </div>
+          </div>
+
+          <div className="rule-box">
+            <div className="rule-head">
+              <ChevronUp size={14} />
+              <span>Section 1</span>
+            </div>
+            <div className="rule-line">
+              <select className="rule-select" defaultValue="AGE">
+                <option value="AGE">AGE</option>
+                <option value="WEIGHT">WEIGHT</option>
+                <option value="EGFR">eGFR</option>
+              </select>
+              <select className="rule-select short" defaultValue="gt">
+                <option value="gt">&gt;</option>
+                <option value="lt">&lt;</option>
+                <option value="eq">=</option>
+              </select>
+              <input className="rule-input" placeholder="Write Input" />
+              <button type="button" className="tool-plus">
+                <Plus size={14} />
+              </button>
+            </div>
+          </div>
+
+          <div className="canvas-area" />
+          <div className="bottom-strip" />
+        </section>
+      </div>
+    </section>
   );
 }

@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pomdong Trial Studio Frontend
 
-## Getting Started
+임상시험 시뮬레이션 SaaS를 위한 프론트엔드 데모 프로젝트입니다.
+백엔드 없이도 더미 데이터(Mock Service)로 실제 서비스 흐름처럼 동작하며, 추후 API 연결을 고려한 구조로 구성되어 있습니다.
 
-First, run the development server:
+## 실행 방법
+
+1. 의존성 설치
+
+```bash
+npm install
+```
+
+2. 개발 서버 실행
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. 브라우저에서 `http://localhost:3000` 접속
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 주요 화면
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/`: 6개 서비스 대시보드(서비스 카드 + 진입 링크)
+- `/services/[serviceId]/scenario`: 조건 설정 폼(검증/미리보기/저장)
+- `/services/[serviceId]/simulation`: 시뮬레이션 대시보드(차트/테이블/필터/정렬/페이지네이션/드로어)
+- `/services/[serviceId]/report`: 리포트 카드/공유 모달/내보내기 드롭다운
 
-## Learn More
+## 구현 포인트
 
-To learn more about Next.js, take a look at the following resources:
+- 리퀴드 글래스 스타일 + 디자인 토큰 기반 UI
+- Desktop 우선 반응형 레이아웃
+- 공통 컴포넌트 분리
+  - 버튼, 입력, 셀렉트, 카드, 모달, 드로어, 툴팁, 페이지네이션
+- 인터랙션
+  - 필터/검색/정렬/선택/토글/모달/드롭다운/드로어
+- 상태 처리
+  - 로딩/빈상태/에러(네트워크 오류 가정) 모두 포함
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Mock API 구조
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 타입 정의: `src/lib/api/types.ts`
+- API 계약: `src/lib/api/contracts.ts`
+- 더미 데이터: `src/lib/api/mockData.ts`
+- Mock 서비스 계층: `src/lib/api/mockService.ts`
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+실제 백엔드 연동 시 `mockService`의 각 함수(`getScenario`, `getSimulation`, `getReport`)를 실제 API 호출로 교체하면 됩니다.
