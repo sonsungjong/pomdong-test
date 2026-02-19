@@ -19,57 +19,59 @@ export default function SubgroupsPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-[440px_1fr] gap-8 items-start mt-4">
+      <div className="grid grid-cols-1 lg:grid-cols-[440px_1fr] gap-8 items-start mt-4">
         {/* Left Column: Summary Card Wrapper (Gray Border Box) */}
-        <div className="bg-[#f2f2f5] rounded-[32px] p-4 border border-[#e1e1e5] shadow-sm sticky top-4">
+        <div className="bg-[#f2f2f5] rounded-[32px] p-4 border border-[#e1e1e5] shadow-sm lg:sticky lg:top-4">
           <SubgroupSetsSummary />
         </div>
 
         <section className="flex flex-col gap-6 p-6 rounded-[32px] bg-white shadow-sm min-h-[800px]">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="border-b border-[#f0f0f3]">
-                <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Detail</th>
-                <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Select</th>
-                <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">No</th>
-                <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Set Name</th>
-                <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Outcome</th>
-                <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Cutoff</th>
-                <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Month</th>
-                <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">#Of Groups</th>
-                <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Progression Delay</th>
-                <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Group balance</th>
-                <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Refine Cutoffs</th>
-                <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="p-3 text-[11px] text-left whitespace-nowrap">
-                  <ChevronDown size={14} className="text-[#6b6d7b]" />
-                </td>
-                <td className="p-3 text-[11px] text-left whitespace-nowrap">
-                  <Square size={14} className="text-[#cbccd2]" />
-                </td>
-                <td className="p-3 text-[13px] text-[#1e1f23]">01</td>
-                <td className="p-3 text-[13px] text-[#1e1f23]">Set 2</td>
-                <td className="p-3 text-[13px] text-[#1e1f23]">rHTE</td>
-                <td className="p-3 text-[13px] text-[#1e1f23] font-bold">≤ 80%</td>
-                <td className="p-3 text-[13px] text-[#1e1f23]">15</td>
-                <td className="p-3 text-[13px] text-[#1e1f23]">3</td>
-                <td className="p-3 text-[13px] text-[#1e1f23]">2.3 months</td>
-                <td className="p-3 text-[13px] text-[#1e1f23]">OK (n min=120)</td>
-                <td className="p-3 text-[11px] text-left whitespace-nowrap">
-                  <RefreshCcw size={14} className="text-[#6b6d7b]" />
-                </td>
-                <td className="p-3 text-[11px] text-left whitespace-nowrap">
-                  <div className="h-4 w-[1px] bg-[#dcdcdf] mx-auto" />
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse min-w-[800px]">
+              <thead>
+                <tr className="border-b border-[#f0f0f3]">
+                  <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Detail</th>
+                  <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Select</th>
+                  <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">No</th>
+                  <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Set Name</th>
+                  <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Outcome</th>
+                  <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Cutoff</th>
+                  <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Month</th>
+                  <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">#Of Groups</th>
+                  <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Progression Delay</th>
+                  <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Group balance</th>
+                  <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Refine Cutoffs</th>
+                  <th className="p-3 text-[12px] font-bold text-[#8b8d98] text-left">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="p-3 text-[11px] text-left whitespace-nowrap">
+                    <ChevronDown size={14} className="text-[#6b6d7b]" />
+                  </td>
+                  <td className="p-3 text-[11px] text-left whitespace-nowrap">
+                    <Square size={14} className="text-[#cbccd2]" />
+                  </td>
+                  <td className="p-3 text-[13px] text-[#1e1f23]">01</td>
+                  <td className="p-3 text-[13px] text-[#1e1f23]">Set 2</td>
+                  <td className="p-3 text-[13px] text-[#1e1f23]">rHTE</td>
+                  <td className="p-3 text-[13px] text-[#1e1f23] font-bold">≤ 80%</td>
+                  <td className="p-3 text-[13px] text-[#1e1f23]">15</td>
+                  <td className="p-3 text-[13px] text-[#1e1f23]">3</td>
+                  <td className="p-3 text-[13px] text-[#1e1f23]">2.3 months</td>
+                  <td className="p-3 text-[13px] text-[#1e1f23]">OK (n min=120)</td>
+                  <td className="p-3 text-[11px] text-left whitespace-nowrap">
+                    <RefreshCcw size={14} className="text-[#6b6d7b]" />
+                  </td>
+                  <td className="p-3 text-[11px] text-left whitespace-nowrap">
+                    <div className="h-4 w-[1px] bg-[#dcdcdf] mx-auto" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-          <div className="grid grid-cols-[1fr_1.6fr] gap-6">
+          <div className="grid grid-cols-1 xl:grid-cols-[1fr_1.6fr] gap-6">
             <div className="flex flex-col gap-6">
               <article className="rounded-2xl border border-[#d2d3d8] bg-[#f8f8fa] p-4">
                 <h3 className="text-[15px] mb-4 font-bold text-[#1e1f23]">Disease Progression by Subgroup</h3>
@@ -114,7 +116,7 @@ export default function SubgroupsPage() {
                 the cutoff for the High Risk group is a reasonable strategy.
               </p>
 
-              <div className="grid grid-cols-2 gap-4 mt-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-auto">
                 <section className="rounded-xl bg-white text-[#1e1f23] p-4">
                   <h4 className="text-[13px] m-0 mb-2 font-bold">Variance decomposition</h4>
                   <div className="flex items-baseline gap-2 mb-4">
