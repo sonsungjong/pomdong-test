@@ -38,7 +38,7 @@ export default function FilterPage() {
         </div>
       </header>
 
-      <div className="mt-3.5 grid grid-cols-[240px_minmax(0,1fr)] gap-3">
+      <div className="mt-3.5 grid grid-cols-1 md:grid-cols-[240px_minmax(0,1fr)] gap-3">
         <aside className="rounded-[14px] border border-[#cdced2] bg-[#efeff1] p-2.5 flex flex-col gap-2">
           <h2 className="m-0 text-sm font-bold">Feature List</h2>
           <input
