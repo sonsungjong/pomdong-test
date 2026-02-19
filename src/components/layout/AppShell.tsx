@@ -103,18 +103,32 @@ export function AppShell({ children }: AppShellProps) {
       <div className="flex-1 flex flex-col min-w-0 p-3 pl-0">
         <header className="h-14 flex items-center justify-between mb-2">
           <nav className="flex flex-wrap items-center gap-2" aria-label="steps">
-            {steps.map((step, index) => (
-              <span
-                key={step}
-                className={`flex items-center text-sm font-semibold ${index === active ? "text-[#1E1b4B]" : "text-gray-400"
-                  }`}
-              >
-                {step}
-                {index < steps.length - 1 ? (
-                  <ChevronRight size={14} className="mx-2 text-gray-300" />
-                ) : null}
-              </span>
-            ))}
+            {steps.map((step, index) => {
+              // Extract number and text (e.g., "1 Filter Patients" -> "1", "Filter Patients")
+              const [num, ...textParts] = step.split(" ");
+              const label = textParts.join(" ");
+              const isActiveStep = index === active;
+
+              return (
+                <span
+                  key={step}
+                  className={`flex items-center text-sm font-semibold gap-2 ${isActiveStep ? "text-[#1E1b4B]" : "text-gray-400"
+                    }`}
+                >
+                  <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ring-1 ${isActiveStep
+                      ? "bg-[#1E1B4B] text-white ring-[#1E1B4B]"
+                      : "bg-white text-gray-400 ring-gray-300"
+                    }`}>
+                    {num}
+                  </span>
+                  <span>{label}</span>
+
+                  {index < steps.length - 1 ? (
+                    <ChevronRight size={14} className="mx-2 text-gray-300" />
+                  ) : null}
+                </span>
+              );
+            })}
           </nav>
 
           <div className="flex items-center gap-3">
@@ -135,8 +149,8 @@ function NavIcon({ active, icon, onClick, label }: { active?: boolean; icon: Rea
       type="button"
       onClick={onClick}
       className={`relative w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-200 group ${active
-          ? "bg-white text-indigo-900 shadow-md scale-105"
-          : "text-gray-500 hover:text-indigo-600 hover:bg-black/5"
+        ? "bg-white text-indigo-900 shadow-md scale-105"
+        : "text-gray-500 hover:text-indigo-600 hover:bg-black/5"
         }`}
       aria-label={label}
     >
